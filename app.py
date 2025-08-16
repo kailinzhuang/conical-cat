@@ -17,10 +17,11 @@ def index():
 
     if request.method == "POST":
         query = request.form["query"]
+        search_query = f"{query} cat" if query else "cat"
 
         # === giphy ===
         giphy_limit = 5
-        giphy_url = f"https://api.giphy.com/v1/gifs/search?api_key={GIPHY_KEY}&q={query}&limit={giphy_limit}"
+        giphy_url = f"https://api.giphy.com/v1/gifs/search?api_key={GIPHY_KEY}&q={search_query}&limit={giphy_limit}"
         try:
             giphy_res = requests.get(giphy_url).json()
             gifs = [gif["images"]["downsized_medium"]["url"] for gif in giphy_res.get("data", [])]
