@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>connical-cat</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-6">
+  <h1 class="text-3xl font-bold text-center">🐈‍⬛ conical-cat 🐱</h1>
+
+  <form method="POST" class="flex justify-center mt-6 gap-2">
+    <input type="text" name="query" value="{{ query }}" placeholder="try couch cat ..."
+      class="border p-2 rounded w-64">
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">search!</button>
+  </form>
+
+  <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6">
+    {% for item in results %}
+      {% if "youtube.com" in item %}
+        <iframe src="{{ item }}" class="rounded-lg w-full h-48"></iframe>
+      {% elif item.endswith(".jpg") or item.endswith(".png") or item.endswith(".jpeg") %}
+        <img src="{{ item }}" alt="cat meme" class="rounded-lg shadow">
+      {% else %}
+        <img src="{{ item }}" alt="cat gif" class="rounded-lg shadow">
+      {% endif %}
+    {% endfor %}
+  </div>
+</body>
+</html>
